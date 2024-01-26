@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quy đổi USD sang VND</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Quy đổi từ USD sang VND</h2>
+  <label for="usdAmount">Nhập số tiền USD:</label>
+  <input type="number" id="usdAmount" placeholder="Số tiền USD" oninput="updateResult()">
+  <br>
+  <button onclick="convertToVND()">Quy đổi</button>
+  <br>
+  <div id="result"></div>
+
+  <script>
+    const exchangeRate = 23500;
+    let hasConverted = false;
+
+    function convertToVND() {
+      // Lấy giá trị từ người dùng
+      const usdAmount = parseFloat(document.getElementById('usdAmount').value);
+
+      // Kiểm tra xem người dùng đã nhập đúng dạng số và không âm
+      if (isNaN(usdAmount) || usdAmount < 0) {
+        alert("Vui lòng nhập một số không âm.");
+        return;
+      }
+
+      // Tính giá trị sau quy đổi
+      const vndAmount = usdAmount * exchangeRate;
+
+      // Hiển thị kết quả
+      document.getElementById('result').innerHTML = `Số tiền sau quy đổi: ${vndAmount} VND`;
+
+      // Đặt biến hasConverted thành true để chỉ ra rằng đã quy đổi ít nhất một lần
+      hasConverted = true;
+    }
+
+    function updateResult() {
+      if (hasConverted) {
+        // Nếu đã quy đổi ít nhất một lần, cập nhật tự động nữa
+        convertToVND();
+      }
+    }
+  </script>
+
+</body>
+</html>

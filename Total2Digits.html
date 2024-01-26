@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tính Tổng Chữ Số</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Nhập vào số có 2 chữ số:</h2>
+  <input type="number" id="inputNumber" placeholder="Nhập số" oninput="updateResult()">
+  <br>
+  <button onclick="calculate()">Tính Tổng</button>
+  <br>
+  <div id="result"></div>
+
+  <script>
+    let hasCalculated = false;
+
+    function calculate() {
+      // Lấy giá trị từ người dùng
+      const inputNumber = document.getElementById('inputNumber').value;
+
+      // Kiểm tra xem người dùng đã nhập đúng dạng số và có 2 chữ số hay không
+      if (isNaN(inputNumber) || inputNumber < 10 || inputNumber > 99) {
+        alert("Vui lòng nhập một số có 2 chữ số.");
+        return;
+      }
+
+      // Tính tổng của hai chữ số
+      const hangChuc = Math.floor(inputNumber / 10);
+      const hangDV = inputNumber % 10;
+      const tong = hangChuc + hangDV;
+
+      // Hiển thị kết quả
+      document.getElementById('result').innerHTML = `Tổng của ${inputNumber} là ${hangChuc} + ${hangDV} = ${tong}`;
+
+      // Đặt biến hasCalculated thành true để chỉ ra rằng đã tính toán ít nhất một lần
+      hasCalculated = true;
+    }
+
+    function updateResult() {
+      if (hasCalculated) {
+        // Nếu đã tính toán ít nhất một lần, cập nhật tự động nữa
+        calculate();
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tính Lương Nhân Viên</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    input {
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Nhập số ngày làm để tính lương:</h2>
+  <input type="number" id="daysWorked" placeholder="Nhập số ngày làm" oninput="updateSalary()">
+  <br>
+  <button onclick="calculateSalary()">Tính Lương</button>
+  <br>
+  <div id="result"></div>
+
+  <script>
+    let daysWorked = 0; // Số ngày làm
+    let calculated = false; // Biến kiểm tra xem lương đã được tính hay chưa
+
+    function updateSalary() {
+      // Lương 1 ngày
+      const luongMotNgay = 100000;
+
+      // Lấy giá trị số ngày làm từ người dùng
+      const inputElement = document.getElementById('daysWorked');
+      daysWorked = inputElement.value;
+
+      // Kiểm tra xem giá trị nhập vào có phải là số và lớn hơn hoặc bằng 0 không
+      if (isNaN(daysWorked) || daysWorked < 0) {
+        alert("Vui lòng nhập số ngày làm hợp lệ.");
+        inputElement.value = 0; // Đặt lại giá trị thành 0 nếu người dùng nhập sai
+        daysWorked = 0; // Cập nhật giá trị ngày làm
+      }
+
+      // Nếu lương đã được tính ít nhất một lần, cập nhật giá trị ngày làm sẽ tự động tính lại lương
+      if (calculated) {
+        calculateSalary();
+      }
+    }
+
+    function calculateSalary() {
+      // Lương 1 ngày
+      const luongMotNgay = 100000;
+
+      // Tính lương
+      const salary = luongMotNgay * daysWorked;
+
+      // Hiển thị kết quả
+      document.getElementById('result').innerHTML = `Lương nhân viên là: ${salary} VND`;
+
+      // Đặt biến calculated thành true để chỉ ra rằng lương đã được tính ít nhất một lần
+      calculated = true;
+    }
+  </script>
+
+</body>
+</html>
